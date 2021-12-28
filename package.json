@@ -53,7 +53,8 @@
     "start": "gatsby develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public -b gh-pages",
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public -b publish",
+    "fixdeployerror": "rm -rf node_modules/.cache/gh-pages",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   }
 }
