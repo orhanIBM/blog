@@ -1,8 +1,57 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[A starter blog with personal notes]]></description><link>https://orhanIBM.github.io/blog</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 29 Dec 2021 02:40:33 GMT</lastBuildDate><item><title><![CDATA[Ansible Modules]]></title><description><![CDATA[Modules are task libraries for Ansibles. They can be used from the cli or in a playbook. Ansible will execute the module on the remote host…]]></description><link>https://orhanIBM.github.io/blog/ansible-modules/</link><guid isPermaLink="false">https://orhanIBM.github.io/blog/ansible-modules/</guid><pubDate>Wed, 29 Dec 2021 02:26:32 GMT</pubDate><content:encoded>&lt;p&gt;Modules are task libraries for Ansibles.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[A starter blog with personal notes]]></description><link>https://orhanIBM.github.io/blog</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 29 Dec 2021 12:27:13 GMT</lastBuildDate><item><title><![CDATA[Ansible Playbooks]]></title><description><![CDATA[Ansible Playbook is a YAML file that contains set of activities to run on host machine(s). An analogy to a workshop could be, hosts are your…]]></description><link>https://orhanIBM.github.io/blog/ansible-playbooks/</link><guid isPermaLink="false">https://orhanIBM.github.io/blog/ansible-playbooks/</guid><pubDate>Wed, 29 Dec 2021 12:26:31 GMT</pubDate><content:encoded>&lt;p&gt;Ansible Playbook is a YAML file that contains set of activities to run on host machine(s).&lt;/p&gt;
+&lt;p&gt;An analogy to a workshop could be, &lt;strong&gt;hosts&lt;/strong&gt; are your raw materials, &lt;strong&gt;modules&lt;/strong&gt; are the tools in your workshop and &lt;strong&gt;playbooks&lt;/strong&gt; are the instruction manual of how to use each &lt;em&gt;module&lt;/em&gt; to craft the &lt;em&gt;host&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;A playbook can be as simple as run command on the server and done with it or as complex as provisioning the full web/app servers and db, seting up network connectivity between, adding reverse proxy and load balancers, monitoring connections and updating all with required patches.&lt;/p&gt;
+&lt;p&gt;Given an inventory file&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;inventory.ini&quot;&gt;&lt;pre class=&quot;language-inventory.ini&quot;&gt;&lt;code class=&quot;language-inventory.ini&quot;&gt;# inventory.ini, after ansible_hosts, variables are just for reference
+[dev]
+dev1 ansible_host=123.x.x.x ansible_user=root
+dev2 ansible_host=123.x.x.x ansible_connection=ssh ansible_port=22
+
+[test]
+...
+[staging]
+...
+[production]
+...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The playbook will execute the plays. The example below will install httpd to dev servers stated in the inventory.ini file.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;playbook.yml&quot;&gt;&lt;pre class=&quot;language-playbook.yml&quot;&gt;&lt;code class=&quot;language-playbook.yml&quot;&gt;# playbook.yml
+
+---
+# Play 1
+- name: Update dev
+  hosts: dev
+  remote_user: root 
+
+  tasks:
+
+  - name: ensure apache is at the latest version
+    # below is an ansible modules
+    ansible.builtin.yum:
+        name: httpd
+        state: latest
+  
+  - name: Write the apache config file
+    # below is an ansible module
+    ansible.builtin.template:
+        src: /srv/httpd.js
+        dest: /etc/httpd.conf
+
+# Play 2
+- name: Update database servers
+  ...
+    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Ansible vs Terraform]]></title><description><![CDATA[Both Ansible and Terraform are DevOps tools that adopts Infrastructure as a Code paradigm. Both Ansible and Terraform can provision…]]></description><link>https://orhanIBM.github.io/blog/ansible-vs-terraform/</link><guid isPermaLink="false">https://orhanIBM.github.io/blog/ansible-vs-terraform/</guid><pubDate>Wed, 29 Dec 2021 11:44:46 GMT</pubDate><content:encoded>&lt;p&gt;Both Ansible and Terraform are DevOps tools that adopts Infrastructure as a Code paradigm.&lt;/p&gt;
+&lt;p&gt;Both Ansible and Terraform can provision infrastructure and manage infrastructure lifecycle.&lt;/p&gt;
+&lt;p&gt;How? Red Hat Ansible Automation Platform can provision the latest cloud platforms, VMs, network devices and bare-metal servers.&lt;/p&gt;
+&lt;p&gt;[Marketing here] So if anyone tells you that Ansible requires pre-set host addresses given in an inventory file, ask them if they heard about Red Hat Ansible Automation Platform.&lt;/p&gt;
+&lt;p&gt;The main difference, however, could be Terraform’s declerative model whereas Ansible’s procedural pattern, similar to a pipeline of tasks.&lt;/p&gt;
+&lt;p&gt;For more see &lt;a href=&quot;https://www.ansible.com&quot;&gt;Red Hat Ansible&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Ansible Modules]]></title><description><![CDATA[Modules are task libraries for Ansibles. They can be used from the cli or in a playbook. Ansible will execute the module on the remote host…]]></description><link>https://orhanIBM.github.io/blog/ansible-modules/</link><guid isPermaLink="false">https://orhanIBM.github.io/blog/ansible-modules/</guid><pubDate>Wed, 29 Dec 2021 02:26:32 GMT</pubDate><content:encoded>&lt;p&gt;Modules are task libraries for Ansibles.&lt;/p&gt;
 &lt;p&gt;They can be used from the cli or in a playbook.&lt;/p&gt;
 &lt;p&gt;Ansible will execute the module on the remote host, collects and return values.&lt;/p&gt;
 &lt;p&gt;For example to restart all webservers listed in inventory file&lt;/p&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;ansible webservers -m command - a &quot;/sbin/reboot -t now&quot;&lt;/code&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Ansible Inventory]]></title><description><![CDATA[Ansible can work with multiple servers. But Ansible needs to access the target machines. For linux these machines are through ssh and for…]]></description><link>https://orhanIBM.github.io/blog/ansible-inventory/</link><guid isPermaLink="false">https://orhanIBM.github.io/blog/ansible-inventory/</guid><pubDate>Wed, 29 Dec 2021 02:03:32 GMT</pubDate><content:encoded>&lt;p&gt;Ansible can work with multiple servers.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;ansible webservers -m command - a &quot;/sbin/reboot -t now&quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;To find more about modules, just search for &lt;em&gt;ansible docs modules latest user guide&lt;/em&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Ansible Inventory]]></title><description><![CDATA[Ansible can work with multiple servers. But Ansible needs to access the target machines. For linux these machines are through ssh and for…]]></description><link>https://orhanIBM.github.io/blog/ansible-inventory/</link><guid isPermaLink="false">https://orhanIBM.github.io/blog/ansible-inventory/</guid><pubDate>Wed, 29 Dec 2021 02:03:32 GMT</pubDate><content:encoded>&lt;p&gt;Ansible can work with multiple servers.&lt;/p&gt;
 &lt;p&gt;But Ansible needs to access the target machines.&lt;/p&gt;
 &lt;p&gt;For linux these machines are through ssh and for windows through Powershell Remoting&lt;/p&gt;
 &lt;p&gt;So no need to install any application to the target machines.&lt;/p&gt;
@@ -82,8 +131,7 @@ s&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&q
 &lt;strong&gt;Slice option&lt;/strong&gt;:&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// golang&lt;/span&gt;
 myString &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;string&quot;&lt;/span&gt;
-myString &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;S&quot;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; myString&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[All About Me]]></title><description><![CDATA[I decided to keep my notes online and here it goes. Check me out at IBM!]]></description><link>https://orhanIBM.github.io/blog/about-me/</link><guid isPermaLink="false">https://orhanIBM.github.io/blog/about-me/</guid><pubDate>Tue, 28 Dec 2021 13:50:32 GMT</pubDate><content:encoded>&lt;p&gt;I decided to keep my notes online and here it goes.&lt;/p&gt;
-&lt;p&gt;Check me out at IBM!&lt;/p&gt;</content:encoded></item><item><title><![CDATA[For Loop]]></title><description><![CDATA[The C style for loop is similar in Golang but different in Python. In Go, one can initiate an index and increment it until a certain…]]></description><link>https://orhanIBM.github.io/blog/loop-in-python/</link><guid isPermaLink="false">https://orhanIBM.github.io/blog/loop-in-python/</guid><pubDate>Tue, 28 Dec 2021 13:50:32 GMT</pubDate><content:encoded>&lt;p&gt;The C style for loop is similar in Golang but different in Python.&lt;/p&gt;
+myString &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;S&quot;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; myString&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[For Loop]]></title><description><![CDATA[The C style for loop is similar in Golang but different in Python. In Go, one can initiate an index and increment it until a certain…]]></description><link>https://orhanIBM.github.io/blog/loop-in-python/</link><guid isPermaLink="false">https://orhanIBM.github.io/blog/loop-in-python/</guid><pubDate>Tue, 28 Dec 2021 13:50:32 GMT</pubDate><content:encoded>&lt;p&gt;The C style for loop is similar in Golang but different in Python.&lt;/p&gt;
 &lt;p&gt;In Go, one can initiate an index and increment it until a certain condition is met.&lt;/p&gt;
 &lt;p&gt;In Python, to generate an index for an iterable, one can use enumerate or range(len(iterable_item)) function.&lt;/p&gt;
 &lt;p&gt;To demonstrate:&lt;/p&gt;
@@ -111,4 +159,5 @@ s &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&qu
 &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; v in &lt;span class=&quot;token keyword&quot;&gt;range&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Text&quot;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     fmt&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Print&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;v&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[All About Me]]></title><description><![CDATA[I decided to keep my notes online and here it goes. Check me out at IBM!]]></description><link>https://orhanIBM.github.io/blog/about-me/</link><guid isPermaLink="false">https://orhanIBM.github.io/blog/about-me/</guid><pubDate>Mon, 20 Dec 2021 13:50:32 GMT</pubDate><content:encoded>&lt;p&gt;I decided to keep my notes online and here it goes.&lt;/p&gt;
+&lt;p&gt;Check me out at IBM!&lt;/p&gt;</content:encoded></item></channel></rss>
