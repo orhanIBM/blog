@@ -7,16 +7,7 @@
 <p>So no need to install any application to the target machines.</p>
 <p>Those target machines are in an inventory file.</p>
 <p>By default ansible looks at /etc/ansible/hosts file if you do not set up one.</p>
-<div class="gatsby-highlight" data-language="txt"><pre class="language-txt"><code class="language-txt">server1.example.com
-server2.example.com
-
-[web]
-web1.example.com
-web2.example.com
-
-[db]
-db.example.com</code></pre></div>
-<p>ansible inventory can contain more parameters</p>
+<p>Ansible inventory file can contain more parameters</p>
 <ul>
 <li>ansible_host</li>
 <li>ansible_connection - ssh/winrm/localhost</li>
@@ -25,8 +16,36 @@ db.example.com</code></pre></div>
 <li>ansible_ssh_pass - password, but use keyless in production</li>
 </ul>
 <p>an example could be</p>
-<div class="gatsby-highlight" data-language="inventory.txt"><pre class="language-inventory.txt"><code class="language-inventory.txt">//inventory.txt file
+<div class="gatsby-highlight" data-language="inventory.ini"><pre class="language-inventory.ini"><code class="language-inventory.ini">//inventory.ini file
 target1 ansible_host=192.168.1.10 ansible_connection=ssh ansible_port=22 ansible_user=root ansible_ssh_pass=password</code></pre></div>
 <p>then run the following ansible command to ping target1 server</p>
-<p><code class="language-text">$ ansible target1 -m ping -i inventory.txt</code></p>
-<p>here we are running ping module on target servers located in inventory file</p></section><hr/><footer><div class="bio"><div data-gatsby-image-wrapper="" style="width:50px;height:50px" class="gatsby-image-wrapper bio-avatar"><div aria-hidden="true" data-placeholder-image="" style="opacity:1;transition:opacity 500ms linear;background-color:#a85868;width:50px;height:50px;position:relative"></div><picture><source type="image/avif" data-srcset="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d4bf4/profile-pic.avif 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/ee81f/profile-pic.avif 100w" sizes="50px"/><source type="image/webp" data-srcset="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/3faea/profile-pic.webp 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/6a679/profile-pic.webp 100w" sizes="50px"/><img data-gatsby-image-ssr="" layout="fixed" data-main-image="" style="opacity:0" sizes="50px" decoding="async" loading="lazy" data-src="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d24ee/profile-pic.jpg" data-srcset="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d24ee/profile-pic.jpg 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/64618/profile-pic.jpg 100w" alt="Profile picture"/></picture><noscript><picture><source type="image/avif" srcSet="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d4bf4/profile-pic.avif 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/ee81f/profile-pic.avif 100w" sizes="50px"/><source type="image/webp" srcSet="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/3faea/profile-pic.webp 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/6a679/profile-pic.webp 100w" sizes="50px"/><img data-gatsby-image-ssr="" layout="fixed" data-main-image="" style="opacity:0" sizes="50px" decoding="async" loading="lazy" src="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d24ee/profile-pic.jpg" srcSet="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d24ee/profile-pic.jpg 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/64618/profile-pic.jpg 100w" alt="Profile picture"/></picture></noscript><script type="module">const t="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;if(t){const t=document.querySelectorAll("img[data-main-image]");for(let e of t){e.dataset.src&&(e.setAttribute("src",e.dataset.src),e.removeAttribute("data-src")),e.dataset.srcset&&(e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset"));const t=e.parentNode.querySelectorAll("source[data-srcset]");for(let e of t)e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset");e.complete&&(e.style.opacity=1)}}</script></div><p>Written by <strong>Orhan Yarar</strong> <!-- -->building useful things for others<!-- --> </p></div></footer></article><nav class="blog-post-nav"><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0"><li><a rel="prev" href="/blog/edit-string-in-golang/">← <!-- -->Edit Strings in Go</a></li><li></li></ul></nav></main><footer>© <!-- -->2021<!-- -->, Built with<!-- --> <a href="https://www.gatsbyjs.com">Gatsby</a></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/ansible-inventory/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-b227d9031ab4094e5021.js"],"app":["/app-a11cb740a2dcf07b5463.js"],"component---src-pages-404-js":["/component---src-pages-404-js-bb1698d01a7f9dde5caa.js"],"component---src-pages-index-js":["/component---src-pages-index-js-7437f41bca5c5b3d05f5.js"],"component---src-pages-using-typescript-tsx":["/component---src-pages-using-typescript-tsx-20f655bfb94bd369e9d3.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-32ab9a990a55b6583ae0.js"]};/*]]>*/</script><script src="/blog/polyfill-b227d9031ab4094e5021.js" nomodule=""></script><script src="/blog/component---src-templates-blog-post-js-32ab9a990a55b6583ae0.js" async=""></script><script src="/blog/commons-f37b3954270f4355ec59.js" async=""></script><script src="/blog/app-a11cb740a2dcf07b5463.js" async=""></script><script src="/blog/framework-e413e527015be9a1bdfd.js" async=""></script><script src="/blog/webpack-runtime-abfd6354cfde64cf40b7.js" async=""></script></body></html>
+<p><code class="language-text">$ ansible target1 -m ping -i inventory.ini</code></p>
+<p>here we are running ping module on target servers located in inventory file.</p>
+<p>If you have more than one target, you can group them</p>
+<div class="gatsby-highlight" data-language="inventory.ini"><pre class="language-inventory.ini"><code class="language-inventory.ini">server1.example.com
+server2.example.com
+
+[web]
+web1.example.com
+web2.example.com
+
+[db]
+db.example.com</code></pre></div>
+<p>or YAML</p>
+<div class="gatsby-highlight" data-language="inventory.yaml"><pre class="language-inventory.yaml"><code class="language-inventory.yaml">#inventory yaml file:
+all:
+    hosts:
+        example.com
+    childern:
+        webservers:
+            hosts:
+                192.168.0.1
+                192.168.0.5
+        
+        dbservers:
+            hosts:
+                192.168.0.10
+                
+</code></pre></div>
+<p>so to <em>execute ping module on webservers</em>, all you have to do is:</p>
+<p><code class="language-text"> $ ansible webservers -m ping -i inventory.yaml</code></p></section><hr/><footer><div class="bio"><div data-gatsby-image-wrapper="" style="width:50px;height:50px" class="gatsby-image-wrapper bio-avatar"><div aria-hidden="true" data-placeholder-image="" style="opacity:1;transition:opacity 500ms linear;background-color:#a85868;width:50px;height:50px;position:relative"></div><picture><source type="image/avif" data-srcset="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d4bf4/profile-pic.avif 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/ee81f/profile-pic.avif 100w" sizes="50px"/><source type="image/webp" data-srcset="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/3faea/profile-pic.webp 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/6a679/profile-pic.webp 100w" sizes="50px"/><img data-gatsby-image-ssr="" layout="fixed" data-main-image="" style="opacity:0" sizes="50px" decoding="async" loading="lazy" data-src="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d24ee/profile-pic.jpg" data-srcset="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d24ee/profile-pic.jpg 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/64618/profile-pic.jpg 100w" alt="Profile picture"/></picture><noscript><picture><source type="image/avif" srcSet="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d4bf4/profile-pic.avif 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/ee81f/profile-pic.avif 100w" sizes="50px"/><source type="image/webp" srcSet="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/3faea/profile-pic.webp 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/6a679/profile-pic.webp 100w" sizes="50px"/><img data-gatsby-image-ssr="" layout="fixed" data-main-image="" style="opacity:0" sizes="50px" decoding="async" loading="lazy" src="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d24ee/profile-pic.jpg" srcSet="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d24ee/profile-pic.jpg 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/64618/profile-pic.jpg 100w" alt="Profile picture"/></picture></noscript><script type="module">const t="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;if(t){const t=document.querySelectorAll("img[data-main-image]");for(let e of t){e.dataset.src&&(e.setAttribute("src",e.dataset.src),e.removeAttribute("data-src")),e.dataset.srcset&&(e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset"));const t=e.parentNode.querySelectorAll("source[data-srcset]");for(let e of t)e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset");e.complete&&(e.style.opacity=1)}}</script></div><p>Written by <strong>Orhan Yarar</strong> <!-- -->building useful things for others<!-- --> </p></div></footer></article><nav class="blog-post-nav"><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0"><li><a rel="prev" href="/blog/edit-string-in-golang/">← <!-- -->Edit Strings in Go</a></li><li><a rel="next" href="/blog/ansible-modules/">Ansible Modules<!-- --> →</a></li></ul></nav></main><footer>© <!-- -->2021<!-- -->, Built with<!-- --> <a href="https://www.gatsbyjs.com">Gatsby</a></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/ansible-inventory/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-b227d9031ab4094e5021.js"],"app":["/app-a11cb740a2dcf07b5463.js"],"component---src-pages-404-js":["/component---src-pages-404-js-bb1698d01a7f9dde5caa.js"],"component---src-pages-index-js":["/component---src-pages-index-js-7437f41bca5c5b3d05f5.js"],"component---src-pages-using-typescript-tsx":["/component---src-pages-using-typescript-tsx-20f655bfb94bd369e9d3.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-32ab9a990a55b6583ae0.js"]};/*]]>*/</script><script src="/blog/polyfill-b227d9031ab4094e5021.js" nomodule=""></script><script src="/blog/component---src-templates-blog-post-js-32ab9a990a55b6583ae0.js" async=""></script><script src="/blog/commons-f37b3954270f4355ec59.js" async=""></script><script src="/blog/app-a11cb740a2dcf07b5463.js" async=""></script><script src="/blog/framework-e413e527015be9a1bdfd.js" async=""></script><script src="/blog/webpack-runtime-abfd6354cfde64cf40b7.js" async=""></script></body></html>

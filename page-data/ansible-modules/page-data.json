@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-templates-blog-post-js",
+    "path": "/ansible-modules/",
+    "result": {"data":{"site":{"siteMetadata":{"title":"Orhan's Blog"}},"markdownRemark":{"id":"54c05cb2-9da5-5e44-b863-0e23de443c87","excerpt":"Modules are task libraries for Ansibles. They can be used from the cli or in a playbook.","html":"<p>Modules are task libraries for Ansibles.</p>\n<p>They can be used from the cli or in a playbook.</p>","frontmatter":{"title":"Ansible Modules","date":"December 29, 2021","description":"Ansible Modules"}},"previous":{"fields":{"slug":"/ansible-inventory/"},"frontmatter":{"title":"Ansible Inventory"}},"next":null},"pageContext":{"id":"54c05cb2-9da5-5e44-b863-0e23de443c87","previousPostId":"794ee658-c9f8-51be-9ba5-5cde05ae4021","nextPostId":null}},
+    "staticQueryHashes": ["2841359383","3257411868"]}

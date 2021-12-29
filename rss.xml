@@ -1,19 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[A starter blog with personal notes]]></description><link>https://orhanIBM.github.io/blog</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 29 Dec 2021 02:25:50 GMT</lastBuildDate><item><title><![CDATA[Ansible Inventory]]></title><description><![CDATA[Ansible can work with multiple servers. But Ansible needs to access the target machines. For linux these machines are through ssh and for…]]></description><link>https://orhanIBM.github.io/blog/ansible-inventory/</link><guid isPermaLink="false">https://orhanIBM.github.io/blog/ansible-inventory/</guid><pubDate>Wed, 29 Dec 2021 02:03:32 GMT</pubDate><content:encoded>&lt;p&gt;Ansible can work with multiple servers.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[A starter blog with personal notes]]></description><link>https://orhanIBM.github.io/blog</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 29 Dec 2021 02:38:03 GMT</lastBuildDate><item><title><![CDATA[Ansible Modules]]></title><description><![CDATA[Modules are task libraries for Ansibles. They can be used from the cli or in a playbook.]]></description><link>https://orhanIBM.github.io/blog/ansible-modules/</link><guid isPermaLink="false">https://orhanIBM.github.io/blog/ansible-modules/</guid><pubDate>Wed, 29 Dec 2021 02:26:32 GMT</pubDate><content:encoded>&lt;p&gt;Modules are task libraries for Ansibles.&lt;/p&gt;
+&lt;p&gt;They can be used from the cli or in a playbook.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Ansible Inventory]]></title><description><![CDATA[Ansible can work with multiple servers. But Ansible needs to access the target machines. For linux these machines are through ssh and for…]]></description><link>https://orhanIBM.github.io/blog/ansible-inventory/</link><guid isPermaLink="false">https://orhanIBM.github.io/blog/ansible-inventory/</guid><pubDate>Wed, 29 Dec 2021 02:03:32 GMT</pubDate><content:encoded>&lt;p&gt;Ansible can work with multiple servers.&lt;/p&gt;
 &lt;p&gt;But Ansible needs to access the target machines.&lt;/p&gt;
 &lt;p&gt;For linux these machines are through ssh and for windows through Powershell Remoting&lt;/p&gt;
 &lt;p&gt;So no need to install any application to the target machines.&lt;/p&gt;
 &lt;p&gt;Those target machines are in an inventory file.&lt;/p&gt;
 &lt;p&gt;By default ansible looks at /etc/ansible/hosts file if you do not set up one.&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;txt&quot;&gt;&lt;pre class=&quot;language-txt&quot;&gt;&lt;code class=&quot;language-txt&quot;&gt;server1.example.com
-server2.example.com
-
-[web]
-web1.example.com
-web2.example.com
-
-[db]
-db.example.com&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;ansible inventory can contain more parameters&lt;/p&gt;
+&lt;p&gt;Ansible inventory file can contain more parameters&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;ansible_host&lt;/li&gt;
 &lt;li&gt;ansible_connection - ssh/winrm/localhost&lt;/li&gt;
@@ -22,11 +14,39 @@ db.example.com&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;li&gt;ansible_ssh_pass - password, but use keyless in production&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;an example could be&lt;/p&gt;
-&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;inventory.txt&quot;&gt;&lt;pre class=&quot;language-inventory.txt&quot;&gt;&lt;code class=&quot;language-inventory.txt&quot;&gt;//inventory.txt file
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;inventory.ini&quot;&gt;&lt;pre class=&quot;language-inventory.ini&quot;&gt;&lt;code class=&quot;language-inventory.ini&quot;&gt;//inventory.ini file
 target1 ansible_host=192.168.1.10 ansible_connection=ssh ansible_port=22 ansible_user=root ansible_ssh_pass=password&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;then run the following ansible command to ping target1 server&lt;/p&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;$ ansible target1 -m ping -i inventory.txt&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;here we are running ping module on target servers located in inventory file&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Edit Strings in Go]]></title><description><![CDATA[In Golang, strings are immutable. Unlike Python or Javascript, strings cannot be edited by accessing its index. To better explain in Python…]]></description><link>https://orhanIBM.github.io/blog/edit-string-in-golang/</link><guid isPermaLink="false">https://orhanIBM.github.io/blog/edit-string-in-golang/</guid><pubDate>Tue, 28 Dec 2021 15:50:32 GMT</pubDate><content:encoded>&lt;p&gt;In Golang, strings are immutable.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;$ ansible target1 -m ping -i inventory.ini&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;here we are running ping module on target servers located in inventory file.&lt;/p&gt;
+&lt;p&gt;If you have more than one target, you can group them&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;inventory.ini&quot;&gt;&lt;pre class=&quot;language-inventory.ini&quot;&gt;&lt;code class=&quot;language-inventory.ini&quot;&gt;server1.example.com
+server2.example.com
+
+[web]
+web1.example.com
+web2.example.com
+
+[db]
+db.example.com&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;or YAML&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;inventory.yaml&quot;&gt;&lt;pre class=&quot;language-inventory.yaml&quot;&gt;&lt;code class=&quot;language-inventory.yaml&quot;&gt;#inventory yaml file:
+all:
+    hosts:
+        example.com
+    childern:
+        webservers:
+            hosts:
+                192.168.0.1
+                192.168.0.5
+        
+        dbservers:
+            hosts:
+                192.168.0.10
+                
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;so to &lt;em&gt;execute ping module on webservers&lt;/em&gt;, all you have to do is:&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt; $ ansible webservers -m ping -i inventory.yaml&lt;/code&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Edit Strings in Go]]></title><description><![CDATA[In Golang, strings are immutable. Unlike Python or Javascript, strings cannot be edited by accessing its index. To better explain in Python…]]></description><link>https://orhanIBM.github.io/blog/edit-string-in-golang/</link><guid isPermaLink="false">https://orhanIBM.github.io/blog/edit-string-in-golang/</guid><pubDate>Tue, 28 Dec 2021 15:50:32 GMT</pubDate><content:encoded>&lt;p&gt;In Golang, strings are immutable.&lt;/p&gt;
 &lt;p&gt;Unlike Python or Javascript, strings cannot be edited by accessing its index.&lt;/p&gt;
 &lt;p&gt;To better explain in Python, the following is possible, but not in Golang.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;python&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# python&lt;/span&gt;
