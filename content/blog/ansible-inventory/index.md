@@ -16,7 +16,30 @@ Those target machines are in an inventory file.
 
 By default ansible looks at /etc/ansible/hosts file if you do not set up one.
 
-```txt
+Ansible inventory file can contain more parameters
+
+* ansible_host
+* ansible_connection - ssh/winrm/localhost
+* ansible_port - 22/5986
+* ansible_user - root/admin/...
+* ansible_ssh_pass - password, but use keyless in production 
+
+an example could be 
+```inventory.ini
+//inventory.ini file
+target1 ansible_host=192.168.1.10 ansible_connection=ssh ansible_port=22 ansible_user=root ansible_ssh_pass=password
+```
+
+then run the following ansible command to ping target1 server
+
+```$ ansible target1 -m ping -i inventory.ini```
+
+here we are running ping module on target servers located in inventory file.
+
+If you have more than one target, you can group them
+
+
+```inventory.ini
 server1.example.com
 server2.example.com
 
@@ -28,23 +51,26 @@ web2.example.com
 db.example.com
 ```
 
-ansible inventory can contain more parameters
+or YAML
 
-* ansible_host
-* ansible_connection - ssh/winrm/localhost
-* ansible_port - 22/5986
-* ansible_user - root/admin/...
-* ansible_ssh_pass - password, but use keyless in production 
+```inventory.yaml
+#inventory yaml file:
+all:
+    hosts:
+        example.com
+    childern:
+        webservers:
+            hosts:
+                192.168.0.1
+                192.168.0.5
+        
+        dbservers:
+            hosts:
+                192.168.0.10
+                
 
-an example could be 
-```inventory.txt
-//inventory.txt file
-target1 ansible_host=192.168.1.10 ansible_connection=ssh ansible_port=22 ansible_user=root ansible_ssh_pass=password
 ```
 
-then run the following ansible command to ping target1 server
+so to *execute ping module on webservers*, all you have to do is:
 
-```$ ansible target1 -m ping -i inventory.txt```
-
-here we are running ping module on target servers located in inventory file
-
+ ``` $ ansible webservers -m ping -i inventory.yaml```
