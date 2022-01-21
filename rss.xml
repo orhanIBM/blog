@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[A starter blog with personal notes]]></description><link>https://orhanIBM.github.io/blog</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 21 Jan 2022 16:01:30 GMT</lastBuildDate><item><title><![CDATA[AWS Solutions Architect Associate]]></title><description><![CDATA[IAM & AWS CLI Section 4 IAM Users & Groups, Policies IAM is a global service Root is the default account, do not share it Users are people…]]></description><link>https://orhanIBM.github.io/blog/aws-saa/</link><guid isPermaLink="false">https://orhanIBM.github.io/blog/aws-saa/</guid><pubDate>Fri, 21 Jan 2022 13:50:32 GMT</pubDate><content:encoded>&lt;h3&gt;IAM &amp;#x26; AWS CLI&lt;/h3&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[A starter blog with personal notes]]></description><link>https://orhanIBM.github.io/blog</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 21 Jan 2022 16:04:51 GMT</lastBuildDate><item><title><![CDATA[AWS Solutions Architect Associate]]></title><description><![CDATA[IAM & AWS CLI Section 4 IAM Users & Groups, Policies IAM is a global service Root is the default account, do not share it Users are people…]]></description><link>https://orhanIBM.github.io/blog/aws-saa/</link><guid isPermaLink="false">https://orhanIBM.github.io/blog/aws-saa/</guid><pubDate>Fri, 21 Jan 2022 13:50:32 GMT</pubDate><content:encoded>&lt;h3&gt;IAM &amp;#x26; AWS CLI&lt;/h3&gt;
 &lt;p&gt;Section 4&lt;/p&gt;
 &lt;h4&gt;IAM Users &amp;#x26; Groups, Policies&lt;/h4&gt;
 &lt;ul&gt;
@@ -155,9 +155,12 @@
 &lt;li&gt;[EXAM QUESTION] Pick the cheapest or most appropriate EC2 Option below given a scenario&lt;/li&gt;
 &lt;li&gt;On-Demand: Short-workload, predictable pricing&lt;/li&gt;
 &lt;li&gt;1 Year Minimum Reserved Instances:
-○ Reserved: Long Workload
-○ Convertible Reserved Instances: Long workload with the option to change the tier
-○ Scheduled Reserved: every Monday 7am for 1hr (no more available)&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;Reserved: Long Workload&lt;/li&gt;
+&lt;li&gt;Convertible Reserved Instances: Long workload with the option to change the tier&lt;/li&gt;
+&lt;li&gt;Scheduled Reserved: every Monday 7am for 1hr (no more available)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;Spot Instances: Short workloads, cheap but can lose instance during work&lt;/li&gt;
 &lt;li&gt;Dedicated: Book the entire physical server, you can control the placement&lt;/li&gt;
 &lt;li&gt;Scenarios:&lt;/li&gt;
@@ -172,8 +175,11 @@
 &lt;li&gt;Can get up to 90% discount&lt;/li&gt;
 &lt;li&gt;Define the max spot price you wanna pay, if the current price is below of your price, you reserve an instance&lt;/li&gt;
 &lt;li&gt;When spot price goes above your max price you have 2 options
-○ Stop/Terminate the instance with a 2 min grace period
-○ Block the spot during a specified timeframe without interruption (not available anymore on AWS, can be in the exam)&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;Stop/Terminate the instance with a 2 min grace period&lt;/li&gt;
+&lt;li&gt;Block the spot during a specified timeframe without interruption (not available anymore on AWS, can be in the exam)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;Remember, spot is not good for databases/critical workload&lt;/li&gt;
 &lt;li&gt;Spot instances can be launched for 1 time or persistently&lt;/li&gt;
 &lt;li&gt;Set the # of instances, types, valid from/to and price then it will add instances when the criteria are met&lt;/li&gt;
@@ -185,9 +191,12 @@
 &lt;li&gt;You can get 1 m5.large or 10 t2.micro both of which can give you the same capacity (let’s say), but their  prices are different, how can you optimize your cost?&lt;/li&gt;
 &lt;li&gt;Welcome to Spot Fleets, it pics the spot instance from possible launch pools: instance types, OS, Availability Zones and stops launching more instances when it hits the max cost or capacity&lt;/li&gt;
 &lt;li&gt;Strategies to allocate Spot instances:
-○ LowestPrice: use for cost optimization and short workload
-○ Diversified: distribute across all pools, so good for availability + longer workload
-○ capacityOptimized: pool with the optimal capacity for the number of instances&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;LowestPrice: use for cost optimization and short workload&lt;/li&gt;
+&lt;li&gt;Diversified: distribute across all pools, so good for availability + longer workload&lt;/li&gt;
+&lt;li&gt;capacityOptimized: pool with the optimal capacity for the number of instances&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;EC2 Solutions Architect Associate Level&lt;/h3&gt;
 &lt;p&gt;Section 6&lt;/p&gt;
@@ -285,31 +294,43 @@
 &lt;h4&gt;EBS Volume Types&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;6 types
-○ GP2 / GP3: SSD balanced, 16TiB,
-○ IO1/ IO2 SSD: mission critical + low latency / high throughput
-○ ST1 HDD: frequently accessed + throughput intensive
-○ SC1 HDD: less frequently accessed data&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;GP2 / GP3: SSD balanced, 16TiB,&lt;/li&gt;
+&lt;li&gt;IO1/ IO2 SSD: mission critical + low latency / high throughput&lt;/li&gt;
+&lt;li&gt;ST1 HDD: frequently accessed + throughput intensive&lt;/li&gt;
+&lt;li&gt;SC1 HDD: less frequently accessed data&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;Cost (Cheap to Expensive) sc1, st1, gp, io&lt;/li&gt;
 &lt;li&gt;Performance (High to low) io, gp, st, sc&lt;/li&gt;
 &lt;li&gt;Should be available as root volume: only gp2/gp3 and io1/io2&lt;/li&gt;
 &lt;li&gt;When to use gp2/gp3?
-○ When you need cost effective storage with low latency
-○ When you need to access system boot volumes
-○ When the size is less than 16TiB
-○ Use gp3 when you need to increase iops 16,000 and throughput 1000MiB/s independently
-○ Use gp2 when you don’t care, and iops and size are linked&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;When you need cost effective storage with low latency&lt;/li&gt;
+&lt;li&gt;When you need to access system boot volumes&lt;/li&gt;
+&lt;li&gt;When the size is less than 16TiB&lt;/li&gt;
+&lt;li&gt;Use gp3 when you need to increase iops 16,000 and throughput 1000MiB/s independently&lt;/li&gt;
+&lt;li&gt;Use gp2 when you don’t care, and iops and size are linked&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;When to use iops (provisioned iops)
-○ Database workloads, sensitive to storage performance + consistency
-○ IO per second more than 16,000
-○ Or critical business applications with sustained io performance
-○ When you need EBS Multi-attach option
-○ And when you need sub-milisecond latency + 256,000 iops use io2 Block Express
-○ For IO more than 32,000 EC2 should be Nitro&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;Database workloads, sensitive to storage performance + consistency&lt;/li&gt;
+&lt;li&gt;IO per second more than 16,000&lt;/li&gt;
+&lt;li&gt;Or critical business applications with sustained io performance&lt;/li&gt;
+&lt;li&gt;When you need EBS Multi-attach option&lt;/li&gt;
+&lt;li&gt;And when you need sub-milisecond latency + 256,000 iops use io2 Block Express&lt;/li&gt;
+&lt;li&gt;For IO more than 32,000 EC2 should be Nitro&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;HDD
-○ Cannot be boot
-○ Min 125MiB
-○ Big data, data warehouses, log processing: st1
-○ For data that is infrequently used: sc1&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;Cannot be boot&lt;/li&gt;
+&lt;li&gt;Min 125MiB&lt;/li&gt;
+&lt;li&gt;Big data, data warehouses, log processing: st1&lt;/li&gt;
+&lt;li&gt;For data that is infrequently used: sc1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4&gt;EBS Multi Attach&lt;/h4&gt;
 &lt;ul&gt;
@@ -320,7 +341,10 @@
 &lt;h4&gt;EBS Encryption&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;When you create an encrypted EBS volume:
-○ Encrypted at rest, in flight, snapshots and volumes created out of it&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;Encrypted at rest, in flight, snapshots and volumes created out of it&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;Encryption has low impact on latency&lt;/li&gt;
 &lt;li&gt;Leverages keys from KMS&lt;/li&gt;
 &lt;li&gt;Can convert unencrypted EBS to encrypted through a snapshot process&lt;/li&gt;
