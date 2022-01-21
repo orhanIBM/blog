@@ -1,7 +1,7 @@
 ---
 title: AWS Solutions Architect Associate
 date: "2022-01-21T13:50:32.169Z"
-description: Just an exam prep notes for AWS Solutions Architect Associate SAA-C02
+description: Just an exam prep notes for AWS Solutions Architect Associate SAA-C02, not comprehensive, errors are my own
 ---
 
 ### IAM & AWS CLI
@@ -72,9 +72,8 @@ Section 4
 ### EC2 Fundamentals
 Section 5
 
-#### AWS Budget Setup
+#### EC2 Basics
 * Set up a budget so we don't overpay
-* EC2 Basics
 * Most popular 
 * Elastic Compute Cloud
 * EC2 settings: OS, CPU, RAM, Storage (EBS & EFS for Network-attached or directly attached to EC2 hardware called EC2 Instance Store), Network Card (speed of the card and Public IP Address), Firewall Rules and User Data for Bootstrap Script
@@ -108,9 +107,9 @@ Section 5
 * [EXAM QUESTION] Pick the cheapest or most appropriate EC2 Option below given a scenario
 * On-Demand: Short-workload, predictable pricing
 * 1 Year Minimum Reserved Instances:
-		○ Reserved: Long Workload
-		○ Convertible Reserved Instances: Long workload with the option to change the tier
-		○ Scheduled Reserved: every Monday 7am for 1hr (no more available)
+  * Reserved: Long Workload
+  * Convertible Reserved Instances: Long workload with the option to change the tier
+  * Scheduled Reserved: every Monday 7am for 1hr (no more available)
 * Spot Instances: Short workloads, cheap but can lose instance during work
 * Dedicated: Book the entire physical server, you can control the placement
 * Scenarios:
@@ -124,8 +123,8 @@ Section 5
 * Can get up to 90% discount
 * Define the max spot price you wanna pay, if the current price is below of your price, you reserve an instance
 * When spot price goes above your max price you have 2 options
-		○ Stop/Terminate the instance with a 2 min grace period
-		○ Block the spot during a specified timeframe without interruption (not available anymore on AWS, can be in the exam)
+  * Stop/Terminate the instance with a 2 min grace period
+  * Block the spot during a specified timeframe without interruption (not available anymore on AWS, can be in the exam)
 * Remember, spot is not good for databases/critical workload
 * Spot instances can be launched for 1 time or persistently
 * Set the # of instances, types, valid from/to and price then it will add instances when the criteria are met
@@ -136,12 +135,12 @@ Section 5
 * You can get 1 m5.large or 10 t2.micro both of which can give you the same capacity (let's say), but their  prices are different, how can you optimize your cost? 
 * Welcome to Spot Fleets, it pics the spot instance from possible launch pools: instance types, OS, Availability Zones and stops launching more instances when it hits the max cost or capacity
 * Strategies to allocate Spot instances:
-		○ LowestPrice: use for cost optimization and short workload
-		○ Diversified: distribute across all pools, so good for availability + longer workload
-		○ capacityOptimized: pool with the optimal capacity for the number of instances
+  * LowestPrice: use for cost optimization and short workload
+  * Diversified: distribute across all pools, so good for availability + longer workload
+  * capacityOptimized: pool with the optimal capacity for the number of instances
 	
 
-### EC2 Solutions Architect Associate Level
+### EC2 - Solutions Architect Associate Level
 Section 6
 
 #### Private vs Public vs Elastic IP
@@ -213,31 +212,31 @@ Section 7
 
 #### EBS Volume Types
 * 6 types
-		○ GP2 / GP3: SSD balanced, 16TiB, 
-		○ IO1/ IO2 SSD: mission critical + low latency / high throughput
-		○ ST1 HDD: frequently accessed + throughput intensive
-		○ SC1 HDD: less frequently accessed data
+  * GP2 / GP3: SSD balanced, 16TiB, 
+  * IO1/ IO2 SSD: mission critical + low latency / high throughput
+  * ST1 HDD: frequently accessed + throughput intensive
+  * SC1 HDD: less frequently accessed data
 * Cost (Cheap to Expensive) sc1, st1, gp, io
 * Performance (High to low) io, gp, st, sc
 * Should be available as root volume: only gp2/gp3 and io1/io2
 * When to use gp2/gp3?
-		○ When you need cost effective storage with low latency
-		○ When you need to access system boot volumes
-		○ When the size is less than 16TiB
-		○ Use gp3 when you need to increase iops 16,000 and throughput 1000MiB/s independently
-		○ Use gp2 when you don't care, and iops and size are linked
+  * When you need cost effective storage with low latency
+  * When you need to access system boot volumes
+  * When the size is less than 16TiB
+  * Use gp3 when you need to increase iops 16,000 and throughput 1000MiB/s independently
+  * Use gp2 when you don't care, and iops and size are linked
 * When to use iops (provisioned iops)
-		○ Database workloads, sensitive to storage performance + consistency
-		○ IO per second more than 16,000
-		○ Or critical business applications with sustained io performance
-		○ When you need EBS Multi-attach option
-		○ And when you need sub-milisecond latency + 256,000 iops use io2 Block Express
-		○ For IO more than 32,000 EC2 should be Nitro
+  * Database workloads, sensitive to storage performance + consistency
+  * IO per second more than 16,000
+  * Or critical business applications with sustained io performance
+  * When you need EBS Multi-attach option
+  * And when you need sub-milisecond latency + 256,000 iops use io2 Block Express
+  * For IO more than 32,000 EC2 should be Nitro
 * HDD
-		○ Cannot be boot
-		○ Min 125MiB 
-		○ Big data, data warehouses, log processing: st1
-		○ For data that is infrequently used: sc1 
+  * Cannot be boot
+  * Min 125MiB 
+  * Big data, data warehouses, log processing: st1
+  * For data that is infrequently used: sc1 
 	
 #### EBS Multi Attach
 * Use case: Achieve high application availability in clustered Linux application
@@ -246,7 +245,7 @@ Section 7
 
 #### EBS Encryption
 * When you create an encrypted EBS volume:
-		○ Encrypted at rest, in flight, snapshots and volumes created out of it
+  * Encrypted at rest, in flight, snapshots and volumes created out of it
 * Encryption has low impact on latency
 * Leverages keys from KMS
 * Can convert unencrypted EBS to encrypted through a snapshot process
@@ -263,15 +262,107 @@ Section 7
 * By default EFS is in Performance mode: latency sensitive use cases such as content management, web server, wordpress etc, if you need big data or media processing where latency is not critical but can process in parallel choose Max I/O under performance mode
 * After selecting Performance mode, decide on throughput mode, whether it should be a burst mode or constant speed mode, where size of the disk is not a factor
 * Finally: Storage Tiers: move file after N days, for Standard: frequently access files and EFS-IA for less frequently accessed data, but when accessed, it costs $ 
+* Select Security Group: for allowing efs access, the type is NFS and security group should point to security group attached to EC2
+* for EC2, you need to mount the EFS to EC2, see the guide for more
 	
-	
-	
-	
+#### EBS vs EFS
+* Number of instances: EBS-One, EFS-Many
+* AZ: EBS-Single AZ, unless snapshot + transfer, EFS-Many
+* Termination: EBS-terminated by default, but can be adjusted, EFS-persists
+* Price: EFS is more expensive than EBS, but can be cheaper if data amount is small and allow Infrequent Access to save costs
 
-	
-	
-	
-	
-	
+### ELB + ASG: HA and Scalability
+Section 8
+
+#### ELB
+* Load balancer, like managed nginx
+* Why not use nginx directly? Ease of integration with other AWS offerings
+* ELB is always HA by default, no need to have a backup ELB
+* ELB can do auto healthchecks (but nginx can do it too)
+* Old ELB - deprecated: Classic Load Balancer: HTTP/S, TCP, SSL (Secure TCP)
+* App Load Balancer: HTTP/S and WebSocket
+* Network Load Balancer: TCP, TLS, UDP
+* Gateway Load Balancer: Layer 3 load balancer at Network Layer - IP Protocol
+* Public ELB: Set Security Group(SG) to allow internet on port 80/443, then EC2 security groups only allowing the SG attached to ELB
+
+#### ALB
+* Layer 7 - HTTP/WebSocket grpc
+* LB multiple apps on the same EC2 running on containers
+* Supports redirects 
+* Routing table to different target group, based on url/path/query
+* ALB can route to EC2, ECS, Lambda fn or private IP addresses
+* ALB gets fixed hostname, xxx.region.elb.amazonaws.com so Route 53 can easily refer to
+* EC2 machines behind ALB can get client IP's through X-Forwarded-For header
+* Set Rules for path/headers/query string etc for electing target groups
+
+#### NLB
+* Layer 4 - TCP/UDP
+* Can handle MM request per second
+* Latency is lower compared to ALB, so good for gaming
+* NLB gets a static IP address, unlike ALB that gets a static hostname, thus you can whitelist an IP address
+* To get around the above case, you can assign an Elastic IP to ALB/NLB
+
+#### Gateway Load Balancer
+* Layer 3 - IP Packets
+* Combines Transperent Network Gateway and Load Balancers
+* Uses the GENEVE protocol on port 6081
+
+#### Session Stickiness
+* Application based cookies or Duration Based Cookies
+* Used for session cookies
+
+#### Cross-Zone Load Balancing
+* Allows even distribution amongst the EC2s irrespective of number of EC2 in an AZ
+* ALB is always on, no inter AZ transfer fee
+* NLB is disabled by default, pay for inter AZ transfer fee
+
+#### SSL Certificates
+* ELB uses an X.509 cert
+* SNI: Server Name Indication is a header, client should add it to the header
+* SNI allows servers to load the correct SSL cert for the correct website on the machine
+* SNI solves multi websites on a single host problem
+* On AWS only ALB/NLB/CloudFront allows
 
 
+#### Complete In-Flight Requests
+* How to stop EC2 when the connection is still active
+* Deregistration Delay feature for ALB/NLB
+* If your request/response cycle is fast, set this to low otherwise (photo upload feature) set to high so you drain EC2 properly
+
+#### ASG
+* Scale in or out and automatically add EC2s to the target group so ELB can refer to
+* ASG refers to average metrics and not the min or max
+* Tracking policies: 
+	* ASG CPU around 50% : Target Tracking
+	* When a CloudWatch alarm is triggered (CPU greater or less than a certain percentage): Simple/Step scaling
+	* On Monday 9am: Scheduled scaling
+	* Forecast load and schedule ahead: Predictive Scaling
+* Scale based on CPU/RAM/Traffic etc
+
+### RDS and ElastiCache
+Section 9
+
+#### RDS
+* Relational Database Service
+* Postgres, MySQL, MariaDB, Oracle, Microsoft SQL, Aurora (AWS Prop)
+* Storage can autoscale automatically, good for unpredictable 
+
+#### Read Replicas vs Multi AZ
+* Read Replicas, up to 5
+* Within the same AZ, Cross AZ or Cross Region
+* But since Cross Region is there, it is not real time, thus ASYNC/Eventually consistent
+* Once Write fails, Read can be promoted, but needs app configuration (promoted db url)
+* Network cost: RDS same replicas within the same region, no fee for cross AZ data transfer, but $$ for Cross Region
+* Multi AZ Disaster Recovery: one DNS name, Standby database located in a different AZ is sync in real time, no other access, promoted to Master when needed
+* Read Replicas can be set up as Multi AZ for Distaster Recovery too
+* Master settings can be modified in real-time to create a standby db in another AZ
+
+#### Encryption
+* At rest encrpytion
+* Defined at launch time
+* [Exam question] if Master is not encrypted, read replicas are not encrpyted as well
+* Encryption through with AWS KMS - AES 256
+* In-flight encryption is possible too
+* You can also convert un-encrypted db to encrypted db
+* IAM policies help who can create/delete dbs, and standard username/password to login the db
+* For PostgreSQL and MySQL you can also use IAM based auth, through IAM & RDS API Calls, the password is short lived
