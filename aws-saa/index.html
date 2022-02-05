@@ -476,9 +476,245 @@
 <li>At rest encrpytion</li>
 <li>Defined at launch time</li>
 <li>[Exam question] if Master is not encrypted, read replicas are not encrpyted as well</li>
+<li>For Oracle / SQL Server there is Transperent Data Encryption</li>
 <li>Encryption through with AWS KMS - AES 256</li>
-<li>In-flight encryption is possible too</li>
+<li>In-flight encryption is possible too; you just need to enforce it</li>
 <li>You can also convert un-encrypted db to encrypted db</li>
 <li>IAM policies help who can create/delete dbs, and standard username/password to login the db</li>
 <li>For PostgreSQL and MySQL you can also use IAM based auth, through IAM &#x26; RDS API Calls, the password is short lived</li>
-</ul></section><hr/><footer><div class="bio"><div data-gatsby-image-wrapper="" style="width:50px;height:50px" class="gatsby-image-wrapper bio-avatar"><div aria-hidden="true" data-placeholder-image="" style="opacity:1;transition:opacity 500ms linear;background-color:#a85868;width:50px;height:50px;position:relative"></div><picture><source type="image/avif" data-srcset="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d4bf4/profile-pic.avif 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/ee81f/profile-pic.avif 100w" sizes="50px"/><source type="image/webp" data-srcset="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/3faea/profile-pic.webp 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/6a679/profile-pic.webp 100w" sizes="50px"/><img data-gatsby-image-ssr="" layout="fixed" data-main-image="" style="opacity:0" sizes="50px" decoding="async" loading="lazy" data-src="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d24ee/profile-pic.jpg" data-srcset="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d24ee/profile-pic.jpg 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/64618/profile-pic.jpg 100w" alt="Profile picture"/></picture><noscript><picture><source type="image/avif" srcSet="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d4bf4/profile-pic.avif 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/ee81f/profile-pic.avif 100w" sizes="50px"/><source type="image/webp" srcSet="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/3faea/profile-pic.webp 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/6a679/profile-pic.webp 100w" sizes="50px"/><img data-gatsby-image-ssr="" layout="fixed" data-main-image="" style="opacity:0" sizes="50px" decoding="async" loading="lazy" src="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d24ee/profile-pic.jpg" srcSet="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d24ee/profile-pic.jpg 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/64618/profile-pic.jpg 100w" alt="Profile picture"/></picture></noscript><script type="module">const t="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;if(t){const t=document.querySelectorAll("img[data-main-image]");for(let e of t){e.dataset.src&&(e.setAttribute("src",e.dataset.src),e.removeAttribute("data-src")),e.dataset.srcset&&(e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset"));const t=e.parentNode.querySelectorAll("source[data-srcset]");for(let e of t)e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset");e.complete&&(e.style.opacity=1)}}</script></div><p>Written by <strong>Orhan Yarar</strong> <!-- -->building useful things for others<!-- --> </p></div></footer></article><nav class="blog-post-nav"><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0"><li><a rel="prev" href="/blog/ansible-playbooks/">← <!-- -->Ansible Playbooks</a></li><li></li></ul></nav></main><footer>© <!-- -->2022<!-- -->, Built with<!-- --> <a href="https://www.gatsbyjs.com">Gatsby</a></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/aws-saa/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-b227d9031ab4094e5021.js"],"app":["/app-a11cb740a2dcf07b5463.js"],"component---src-pages-404-js":["/component---src-pages-404-js-bb1698d01a7f9dde5caa.js"],"component---src-pages-index-js":["/component---src-pages-index-js-7437f41bca5c5b3d05f5.js"],"component---src-pages-using-typescript-tsx":["/component---src-pages-using-typescript-tsx-20f655bfb94bd369e9d3.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-32ab9a990a55b6583ae0.js"]};/*]]>*/</script><script src="/blog/polyfill-b227d9031ab4094e5021.js" nomodule=""></script><script src="/blog/component---src-templates-blog-post-js-32ab9a990a55b6583ae0.js" async=""></script><script src="/blog/commons-f37b3954270f4355ec59.js" async=""></script><script src="/blog/app-a11cb740a2dcf07b5463.js" async=""></script><script src="/blog/framework-e413e527015be9a1bdfd.js" async=""></script><script src="/blog/webpack-runtime-abfd6354cfde64cf40b7.js" async=""></script></body></html>
+</ul>
+<h4>Amazon Aurora</h4>
+<ul>
+<li>Aurora automatically scales out, all the way up to 128TB, i.e. never run out of space</li>
+<li>Aurora can have 15 replicas and fast read replicas</li>
+<li>HA is already built in, so should one db fail, other one picks up automatically</li>
+<li>6 copies of your data is on 3 AZ (4 for writes 3 for reads)</li>
+<li>Supports global database version, i.e. data replicated across regions</li>
+<li>Application points to a single DNS name for WRITE, and even if the db fails, aurora promotes a read replica but dns name does not change</li>
+<li>Application points to Reader Endpoint which is a Load Balancer, so you can scale up to 15 reads and don’t change the code</li>
+<li>Possibility to create certain endpoints, pointing to larger read db’s (i.e. big data analysis reasons or annual reporting etc.)</li>
+<li>Can implement scaling policy to increase the number of read replicas</li>
+<li>Security at Aurora is the same as RDS, so can’t ssh, protect with security groups; encrypted at rest, can use IAM etc.</li>
+</ul>
+<h4>Advanced Concepts on Aurora</h4>
+<ul>
+<li>If the db workload is intermittent, then choose Aurora Serverless because no capacity planning needed and pay per second used</li>
+<li>High Availability is a requirement and immediate failover for write node: every node is both read and write</li>
+<li>Aurora Global Database: Useful for disaster recovery but promoting to another region less than 1 minute</li>
+</ul>
+<h4>ElastiCache Overview</h4>
+<ul>
+<li>
+<p>Managed Redis/Memcached</p>
+</li>
+<li>
+<p>Note, using ElastiCache requires heavy application code changes</p>
+</li>
+<li>
+<p>If not a cache hit, go query the db update elasticache and return the result (depending on cache invalidation strategy)</p>
+</li>
+<li>
+<p>A use case is session data stored at ElastiCache</p>
+</li>
+<li>
+<p>[Exam] Redis vs Memcached</p>
+<ul>
+<li>Redis______________________Memcached</li>
+<li>Multi AZ + auto-failover_____Sharding, multi-node</li>
+<li>Data Replicated thus HA____No replication, no HA</li>
+<li>Data can be durable________No data persistency</li>
+<li>Backup_____________________No backup</li>
+<li>Restore____________________No restore</li>
+</ul>
+</li>
+<li>
+<p>Why Memcached? Sharding reasons, speed up dynamic web apps</p>
+</li>
+<li>
+<p>Why Redis? In-memory data for db cache or message broker</p>
+</li>
+<li>
+<p>Elastiache does not support IAM authentication</p>
+</li>
+<li>
+<p>IAM policies are only for AWS API level</p>
+</li>
+<li>
+<p>Password/token can be created to secure the cache access</p>
+</li>
+<li>
+<p>Supports security groups so only certain EC2 can access</p>
+</li>
+<li>
+<p>Caching patterns: lazy load, write through, session store</p>
+</li>
+<li>
+<p>Gaming leaderboard is an [exam] use case through Redis Sorted sets</p>
+</li>
+</ul>
+<h3>Route 53</h3>
+<p>Section 10</p>
+<h4>Route 53 Overview</h4>
+<ul>
+<li>DNS and domain registrar</li>
+<li>Users can change DNS records to add/remove domain names</li>
+<li>Users can buy domain names</li>
+<li>The only AWS svc that provides 100% availability in the SLA</li>
+<li>Record: How do you want to route traffic to a domain</li>
+<li>Record should contain domain name, record type, value, routing policy and TTL</li>
+<li>[Exam] must know A/AAAA/CNAME/NS record types</li>
+<li>A Record = host name => IPv4 <a href="http://www.orhan.com">www.orhan.com</a> => 12.34.56.78</li>
+<li>AAAA Record = host name => IPv6</li>
+<li>CNAME = canonical name record, used to alias one domain name to another ie <a href="http://www.orhan.com">www.orhan.com</a> => <a href="http://www.ibm.com">www.ibm.com</a></li>
+<li>Note cannot create CNAME for <a href="http://orhan.com">http://orhan.com</a>, but for <a href="http://www.orhan.com">http://www.orhan.com</a> or <a href="http://blog.orhan.com">http://blog.orhan.com</a></li>
+<li>Why not? <a href="https://www.freecodecamp.org/news/why-cant-a-domain-s-root-be-a-cname-8cbab38e5f5c/">See here - freecodecamp</a></li>
+<li>NS - Name Servers for the Hosted Zone</li>
+<li>Hosted zones: records of domain and its sub domains</li>
+<li>Public hosted zone: app.example.com</li>
+<li>Private hosted zone: within VPC, app.example.internal</li>
+<li>In a private hosted zone, an EC2 with webapp.acme.internal can ping api.acme.internal and get the local IP of the api server on an another EC2 and send the request. The api server then can try to connect the local db through db.acme.internal and get the local ip of the database and query the db</li>
+<li>TTL: cache the IP address for the duration of the seconds so the dns query is not sent again, high TTL means don’t come to the DNS server for a while. If the records are not changing that often, then keep it longer period</li>
+<li>CNAME vs Aliases, remember Canonical Name or CNAME is a pointer to another domain, such as <a href="http://api.acme.com">http://api.acme.com</a> => <a href="http://ibm.com">http://ibm.com</a> or to =><a href="http://version2.acme.com">http://version2.acme.com</a>; Alias points to an AWS Resources and your root domain <a href="http://acme.com">http://acme.com</a> can point to an AWS ELB, you cannot achieve that with CNAMEs</li>
+<li>Alias can refer to ELB CloudFront, API Gateway, Elastic Beanstalk, S3 Websites, Global Accelerator, Route 53 Record but not EC2 DNS Name! And cannot set TTL on Alias</li>
+</ul>
+<h4>Route 53 Routing</h4>
+<ul>
+<li>Simple: route to single record A/AAAA, for multiple return, random chosen, so cannot associate w/ health checks</li>
+<li>Weighted: Load balancing between regions, A/B testing, 0 weight can be assigned, failover supported</li>
+<li>Failover: (Active-Passive), if health check fails, route the requests to the second record</li>
+<li>Latency Based: Lowest latency to the user from AWS region, failover supported</li>
+<li>Geolocation: Where the user is located, geo IP, used for content restriction</li>
+<li>Geoproximity:  Location based on bias, so on the US map, 90-10 split, so east of Chicago goes to East and west of Chicago goes to West servers</li>
+<li>multi-value</li>
+<li>Private subnet healthcheck since Route 53 cannot access private zone? Create a CloudWatch Metric and associate CW Alarm and Health Check will then check the alarm itself</li>
+</ul>
+<h3>Amazon S3</h3>
+<p>Section 12</p>
+<h3>AWS SDK, IAM</h3>
+<p>Section 13</p>
+<h3>S3 and Athena</h3>
+<p>Section 14</p>
+<h3>CloudFront &#x26; Global Accelerator</h3>
+<p>Section 15</p>
+<h3>Storage Extras</h3>
+<p>Section 16</p>
+<h3>Decoupling Applications</h3>
+<p>Section 17</p>
+<h4>Messaging</h4>
+<ul>
+<li>Synchronous vs Asynchronous</li>
+<li>Async is mostly event based</li>
+<li>There are ways to decouple applications, queueing, publish/subscribe or real-time stream</li>
+<li>queue: SQS, pub/sub: SNS, real-time stream: Kinesis</li>
+</ul>
+<h4>SQS</h4>
+<ul>
+<li>
+<p>Standard Queue, such as IBM MQ</p>
+</li>
+<li>
+<p>Application decoupling in the exam is SQS</p>
+</li>
+<li>
+<p>Unlimited throughput and unlimited number of days</p>
+</li>
+<li>
+<p>Retention is between 1 min and 14 days</p>
+</li>
+<li>
+<p>Latency less than 10ms</p>
+</li>
+<li>
+<p>Size 256KB per message</p>
+</li>
+<li>
+<p>Standard Queue can have at least once delivery, occasionaly (alternative is FIFO)</p>
+</li>
+<li>
+<p>Can have out of order messages, so not orderly</p>
+</li>
+<li>
+<p>SendMessage API sends message to SQS Queue, messages is persisted, until a consumer deletes it</p>
+</li>
+<li>
+<p>Consumers can be running on EC2/AWS Lamda, on-prem servers</p>
+</li>
+<li>
+<p>Consumers Poll SQS messages, up to 10 at a time, then delete message using DeleteMessage API</p>
+</li>
+<li>
+<p>SQS Queue + ASG with CloudWatch Metric of Queue Length + Cloud Watch Alarm</p>
+</li>
+<li>
+<p>As the EC2 scales up, the same message can be sent to many EC2s, thus remember: at least once, may not be orderly</p>
+</li>
+<li>
+<p>Security: at-rest KMS, in-flight HTTPS API, Access Control via IAM to regulate the access to SQS (who can add to/ poll queue), and SQS Access Policies to manage SNS,S3 etc to write to an SQS Queue</p>
+</li>
+<li>
+<p>Access Policies are similar to S3; cross account (EC2 in one aws account can poll another account SQS Queue)</p>
+</li>
+<li>
+<p>Another policy is: Publish S3 Event Notifications to SQS Queue, for instance when someone uploads an object to S3 Bucket, S3 Events can be published to SQS Queue and the JSON Policy for that should include Condition [Exam]</p>
+</li>
+<li>
+<p>The SQS Queue processing architecture: Visibility Timeout: when a message is being processed by a consumer, that message becomes invisible to other consumers. So no rush case. But if not processed during the timeout, it goes back to the queue, thus can be processed twice; as well, if the consumer did not delete it after processing, it goes back to the queue</p>
+</li>
+<li>
+<p>The consumers can also call, ChangeMessageVisibility API to delay the processing time for that specific message</p>
+</li>
+</ul>
+<h3>Containers</h3>
+<p>Section 18</p>
+<h4>ECS Overview</h4>
+<ul>
+<li>On ECS, the user provisions &#x26; maintains the EC2 infrastructure</li>
+<li>Then ECS Service decides where to place the containers</li>
+<li>Two launch types: EC2 Launch Type and Fargate</li>
+<li>Can create an ECS cluster across AZs in a Region</li>
+<li>Multi EC2s register to ASG(s), which are registered to ECS Cluster</li>
+<li>When registered, ECS agent is attached to each EC2s</li>
+<li>Then user can run ECS Tasks such as run httpd server</li>
+<li>Fargate is serverless, does not manage EC2s, no need to manage the infrastructure</li>
+<li>Requirement: Set CPU/RAM requirements and</li>
+<li>For each Task to run in Fargate, there is an ENI created (one-to-one)</li>
+<li>Since ENI requires private IP addresses, make sure VPC has enough Private IP available for each task</li>
+<li>ECS tasks can interact with other AWS services (DB, SNS etc)</li>
+<li>[Potential Exam Question] EC2 Instance Profile and ECS Task Role</li>
+<li>Remember, in EC2 Launch Profile in ECS, user manages the EC2s; and ECS Agents are attached to the EC2. Therefore EC2 needs to communicate with the ECS service (make api calls), or send logs to CloudWatch service, or pull images from the AWS Registry service ECR, or pull secrets. But to do all of that EC2 needs IAM Permission. That is called EC2 Instance Profile</li>
+<li>But we haven’t added any task to the container service. So the permission assigned to the Tasks are ECS Task Role [Another Exam Question]. Make sure that you have a dedicated ECS Task Role for each Task and Task Role is defined in the Task Definition</li>
+<li>Data volumes can be hosted in EFS and EC2 Tasks/Fargate tasks can share data amongs the container.</li>
+<li>Use Case mutli-az shared storage for containers without managing and infra (i.e. serverless)=> Fargate + EFS</li>
+<li>Load Balancing in EC2 Launch Type: Do not expose a dedicated port, let ECS take care of it. Connect to ALB and allow ALB security group to access any port on the EC2</li>
+<li>For Fargate, since ENI is attached it has unique IP but exposes the same port (say 80), so for security, allow ALB to access the same Task Port on all ENI</li>
+<li>Can automate the tasks via S3 Bucket Event emitting an event to Amazon EventBridge running an ECS Task on the ECS Cluster that has correct ECS Task Role to execute (i.e. get S3 object, transform save in DynamoDB requires ECS Task Role to have S3/DynamoDB access rights)</li>
+</ul>
+<h4>Scaling</h4>
+<ul>
+<li>Create CloudWatch Metric (for RAM/CPU useage), triggers CloudWatch Alarm, that scales containers, thanks to ASG</li>
+<li>What if the client is using EC2 Launch type and wants to scale up EC2 size? That is also available through Scale ECS Providers</li>
+<li>Alternative is SQS Queue; create an SQS Queue and ECS that polls messages from SQS, then again create CloudWatch Metric for Queue Length and the rest is the same</li>
+<li>Similar to Kubernetes Rolling Updates, ECS also provides the same functionality</li>
+</ul>
+<h4>ECR</h4>
+<ul>
+<li>DockerHub for AWS, supporting ECS + IAM</li>
+</ul>
+<h4>EKS</h4>
+<ul>
+<li>Managed Kubernetes Cluster, competing with RedHat Openshift Container Platform</li>
+</ul>
+<h3>Serverless</h3>
+<p>Section 19 &#x26; 20</p>
+<h3>More Databases</h3>
+<p>Section 21</p>
+<h3>Auditing and Logging</h3>
+<p>Section 22</p>
+<h3>IAM Advanced</h3>
+<p>Section 23</p>
+<h3>Security and Encryption</h3>
+<p>Section 24</p>
+<h3>VPC</h3>
+<p>Section 25</p>
+<h3>Disaster Recovery</h3>
+<p>Section 26</p></section><hr/><footer><div class="bio"><div data-gatsby-image-wrapper="" style="width:50px;height:50px" class="gatsby-image-wrapper bio-avatar"><div aria-hidden="true" data-placeholder-image="" style="opacity:1;transition:opacity 500ms linear;background-color:#a85868;width:50px;height:50px;position:relative"></div><picture><source type="image/avif" data-srcset="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d4bf4/profile-pic.avif 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/ee81f/profile-pic.avif 100w" sizes="50px"/><source type="image/webp" data-srcset="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/3faea/profile-pic.webp 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/6a679/profile-pic.webp 100w" sizes="50px"/><img data-gatsby-image-ssr="" layout="fixed" data-main-image="" style="opacity:0" sizes="50px" decoding="async" loading="lazy" data-src="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d24ee/profile-pic.jpg" data-srcset="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d24ee/profile-pic.jpg 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/64618/profile-pic.jpg 100w" alt="Profile picture"/></picture><noscript><picture><source type="image/avif" srcSet="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d4bf4/profile-pic.avif 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/ee81f/profile-pic.avif 100w" sizes="50px"/><source type="image/webp" srcSet="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/3faea/profile-pic.webp 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/6a679/profile-pic.webp 100w" sizes="50px"/><img data-gatsby-image-ssr="" layout="fixed" data-main-image="" style="opacity:0" sizes="50px" decoding="async" loading="lazy" src="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d24ee/profile-pic.jpg" srcSet="/blog/static/d18a17e834f77b005c1a081bb3b0ee58/d24ee/profile-pic.jpg 50w,/blog/static/d18a17e834f77b005c1a081bb3b0ee58/64618/profile-pic.jpg 100w" alt="Profile picture"/></picture></noscript><script type="module">const t="undefined"!=typeof HTMLImageElement&&"loading"in HTMLImageElement.prototype;if(t){const t=document.querySelectorAll("img[data-main-image]");for(let e of t){e.dataset.src&&(e.setAttribute("src",e.dataset.src),e.removeAttribute("data-src")),e.dataset.srcset&&(e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset"));const t=e.parentNode.querySelectorAll("source[data-srcset]");for(let e of t)e.setAttribute("srcset",e.dataset.srcset),e.removeAttribute("data-srcset");e.complete&&(e.style.opacity=1)}}</script></div><p>Written by <strong>Orhan Yarar</strong> <!-- -->building useful things for others<!-- --> </p></div></footer></article><nav class="blog-post-nav"><ul style="display:flex;flex-wrap:wrap;justify-content:space-between;list-style:none;padding:0"><li><a rel="prev" href="/blog/ansible-playbooks/">← <!-- -->Ansible Playbooks</a></li><li></li></ul></nav></main><footer>© <!-- -->2022<!-- -->, Built with<!-- --> <a href="https://www.gatsbyjs.com">Gatsby</a></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/aws-saa/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-b227d9031ab4094e5021.js"],"app":["/app-a11cb740a2dcf07b5463.js"],"component---src-pages-404-js":["/component---src-pages-404-js-bb1698d01a7f9dde5caa.js"],"component---src-pages-index-js":["/component---src-pages-index-js-7437f41bca5c5b3d05f5.js"],"component---src-pages-using-typescript-tsx":["/component---src-pages-using-typescript-tsx-20f655bfb94bd369e9d3.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-32ab9a990a55b6583ae0.js"]};/*]]>*/</script><script src="/blog/polyfill-b227d9031ab4094e5021.js" nomodule=""></script><script src="/blog/component---src-templates-blog-post-js-32ab9a990a55b6583ae0.js" async=""></script><script src="/blog/commons-f37b3954270f4355ec59.js" async=""></script><script src="/blog/app-a11cb740a2dcf07b5463.js" async=""></script><script src="/blog/framework-e413e527015be9a1bdfd.js" async=""></script><script src="/blog/webpack-runtime-abfd6354cfde64cf40b7.js" async=""></script></body></html>
