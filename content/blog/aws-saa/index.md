@@ -4,6 +4,8 @@ date: "2022-01-21T13:50:32.169Z"
 description: Just an exam prep notes for AWS Solutions Architect Associate SAA-C02, not comprehensive, errors are my own
 ---
 
+Disclaimer: This is not exhaustive list of topics, I only kept notes for the areas that I found important.
+
 ### IAM & AWS CLI
 Section 4
 
@@ -486,9 +488,59 @@ Section 17
 * Security: at-rest KMS, in-flight HTTPS API, Access Control via IAM to regulate the access to SQS (who can add to/ poll queue), and SQS Access Policies to manage SNS,S3 etc to write to an SQS Queue
 * Access Policies are similar to S3; cross account (EC2 in one aws account can poll another account SQS Queue) 
 * Another policy is: Publish S3 Event Notifications to SQS Queue, for instance when someone uploads an object to S3 Bucket, S3 Events can be published to SQS Queue and the JSON Policy for that should include Condition [Exam]
+
+
+#### Message Visibility Timeout
 * The SQS Queue processing architecture: Visibility Timeout: when a message is being processed by a consumer, that message becomes invisible to other consumers. So no rush case. But if not processed during the timeout, it goes back to the queue, thus can be processed twice; as well, if the consumer did not delete it after processing, it goes back to the queue
 
 * The consumers can also call, ChangeMessageVisibility API to delay the processing time for that specific message 
+
+#### Dead Letter Queue
+* When a message is not processed x times, then put it in the Dead Letter Queue (DLQ)
+* After MaximumReceives threshold is surpassed; the message is sent to DLQ
+* If you have lots of messages and not processed on time and sent back to the SQS Queue again and again, it can be sent to DLQ as well, even though the message itself had no problems
+
+#### Delay Queue
+* Possible to delay the message to be polled from the queue
+
+#### Long Polling
+* Why? Decrease the latency and minimize the number of api calls to the queue
+* Can be done via WaitTimeSeconds 
+
+#### Requet - Response Pattern
+* When a producer, sends a message to the queue, it can also attach, response to property, where the response will go to another queue
+* Then another producers can read from this second queue to continue on the request-response cycle
+* Amazon already implemented such pattern, called SQS Temporary Queue Client, it is more cost effective then developers building such system into AWS
+
+#### FIFO Queues
+* First in First Out
+* Guaranteed to be processed in order
+* Sent to the queue only once (if message does not contain deduplication ID, AWS hashes the message body to compare)
+* Limited capacity, 3000 when batches otherwise 300 msgs per second 
+* Use when order is important (i.e price changes) or student cannot enroll to class before registering
+
+#### SNS
+* Publish to an SNS Topic and have many subscribers
+* Instead of having one producer/consumer, why not send the same message to many receivers?
+* For example, When an order is received for a product, send an email notification to the client, send the order to the inventory, and check for payment and even put it into an SQS Queue
+* Send one message to one topic, and each subscribers will get all the messages (possible to filter as well)
+* 10 million subscribers and 100,000 topics are possible
+* An SQS can be a subscriber as well as Lambda functions, or emails/text etc.
+* Many AWS services can send data to an SNS topic
+* For direct publish architecture (mobile apps SDK), create a platform endpoint and and publish there so mobile end users get notification
+* Who can access SNS API (i.e. developer)? Regulate Access Control
+* Who can write to SNS topic (i.e. S3 Event) ? Regulate Access Policies 
+* Security: Encryption at rest and in flight
+
+#### SNS + SQS Queue Fan Out
+* SQS Queues to subscribe to one SNS Topic 
+* Publish the message to SNS Topic and the same message will be sent to the subscribed queues
+* SNS should be allowed in SQS Access Policies to write into the queues
+* SNS allows message filtering as well, so SQS subscribers can only receive relevant messages to the queue
+
+#### Kinesis
+* Real-time data processing/analysis
+* Logs, click streams, metrics, telemetry data etc
 
 
 ### Containers
