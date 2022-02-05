@@ -361,8 +361,191 @@ Section 9
 * At rest encrpytion
 * Defined at launch time
 * [Exam question] if Master is not encrypted, read replicas are not encrpyted as well
+* For Oracle / SQL Server there is Transperent Data Encryption
 * Encryption through with AWS KMS - AES 256
-* In-flight encryption is possible too
+* In-flight encryption is possible too; you just need to enforce it
 * You can also convert un-encrypted db to encrypted db
 * IAM policies help who can create/delete dbs, and standard username/password to login the db
 * For PostgreSQL and MySQL you can also use IAM based auth, through IAM & RDS API Calls, the password is short lived
+
+#### Amazon Aurora
+* Aurora automatically scales out, all the way up to 128TB, i.e. never run out of space
+* Aurora can have 15 replicas and fast read replicas
+* HA is already built in, so should one db fail, other one picks up automatically 
+* 6 copies of your data is on 3 AZ (4 for writes 3 for reads)
+* Supports global database version, i.e. data replicated across regions
+* Application points to a single DNS name for WRITE, and even if the db fails, aurora promotes a read replica but dns name does not change
+* Application points to Reader Endpoint which is a Load Balancer, so you can scale up to 15 reads and don't change the code
+* Possibility to create certain endpoints, pointing to larger read db's (i.e. big data analysis reasons or annual reporting etc.)
+* Can implement scaling policy to increase the number of read replicas
+* Security at Aurora is the same as RDS, so can't ssh, protect with security groups; encrypted at rest, can use IAM etc.
+
+#### Advanced Concepts on Aurora
+* If the db workload is intermittent, then choose Aurora Serverless because no capacity planning needed and pay per second used 
+* High Availability is a requirement and immediate failover for write node: every node is both read and write
+* Aurora Global Database: Useful for disaster recovery but promoting to another region less than 1 minute
+
+#### ElastiCache Overview
+* Managed Redis/Memcached
+* Note, using ElastiCache requires heavy application code changes
+* If not a cache hit, go query the db update elasticache and return the result (depending on cache invalidation strategy)
+* A use case is session data stored at ElastiCache
+* [Exam] Redis vs Memcached
+  * Redis______________________Memcached
+  * Multi AZ + auto-failover_____Sharding, multi-node              
+  * Data Replicated thus HA____No replication, no HA
+  * Data can be durable________No data persistency
+  * Backup_____________________No backup
+  * Restore____________________No restore
+
+* Why Memcached? Sharding reasons, speed up dynamic web apps
+* Why Redis? In-memory data for db cache or message broker
+* Elastiache does not support IAM authentication
+* IAM policies are only for AWS API level
+* Password/token can be created to secure the cache access
+* Supports security groups so only certain EC2 can access
+* Caching patterns: lazy load, write through, session store
+* Gaming leaderboard is an [exam] use case through Redis Sorted sets
+
+### Route 53
+Section 10
+
+#### Route 53 Overview
+* DNS and domain registrar
+* Users can change DNS records to add/remove domain names
+* Users can buy domain names
+* The only AWS svc that provides 100% availability in the SLA
+* Record: How do you want to route traffic to a domain
+* Record should contain domain name, record type, value, routing policy and TTL
+* [Exam] must know A/AAAA/CNAME/NS record types
+* A Record = host name => IPv4 www.orhan.com => 12.34.56.78
+* AAAA Record = host name => IPv6
+* CNAME = canonical name record, used to alias one domain name to another ie www.orhan.com => www.ibm.com
+* Note cannot create CNAME for http://orhan.com, but for http://www.orhan.com or http://blog.orhan.com
+* Why not? [See here - freecodecamp](https://www.freecodecamp.org/news/why-cant-a-domain-s-root-be-a-cname-8cbab38e5f5c/)
+* NS - Name Servers for the Hosted Zone
+* Hosted zones: records of domain and its sub domains
+* Public hosted zone: app.example.com
+* Private hosted zone: within VPC, app.example.internal
+* In a private hosted zone, an EC2 with webapp.acme.internal can ping api.acme.internal and get the local IP of the api server on an another EC2 and send the request. The api server then can try to connect the local db through db.acme.internal and get the local ip of the database and query the db
+* TTL: cache the IP address for the duration of the seconds so the dns query is not sent again, high TTL means don't come to the DNS server for a while. If the records are not changing that often, then keep it longer period
+* CNAME vs Aliases, remember Canonical Name or CNAME is a pointer to another domain, such as http://api.acme.com => http://ibm.com or to =>http://version2.acme.com; Alias points to an AWS Resources and your root domain http://acme.com can point to an AWS ELB, you cannot achieve that with CNAMEs
+* Alias can refer to ELB CloudFront, API Gateway, Elastic Beanstalk, S3 Websites, Global Accelerator, Route 53 Record but not EC2 DNS Name! And cannot set TTL on Alias
+
+#### Route 53 Routing
+* Simple: route to single record A/AAAA, for multiple return, random chosen, so cannot associate w/ health checks
+* Weighted: Load balancing between regions, A/B testing, 0 weight can be assigned, failover supported
+* Failover: (Active-Passive), if health check fails, route the requests to the second record
+* Latency Based: Lowest latency to the user from AWS region, failover supported
+* Geolocation: Where the user is located, geo IP, used for content restriction
+* Geoproximity:  Location based on bias, so on the US map, 90-10 split, so east of Chicago goes to East and west of Chicago goes to West servers
+* multi-value
+* Private subnet healthcheck since Route 53 cannot access private zone? Create a CloudWatch Metric and associate CW Alarm and Health Check will then check the alarm itself
+
+
+
+### Amazon S3
+Section 12
+
+
+### AWS SDK, IAM
+Section 13
+
+### S3 and Athena
+Section 14
+
+### CloudFront & Global Accelerator
+Section 15
+
+### Storage Extras
+Section 16
+
+### Decoupling Applications
+Section 17
+
+#### Messaging
+* Synchronous vs Asynchronous
+* Async is mostly event based
+* There are ways to decouple applications, queueing, publish/subscribe or real-time stream
+* queue: SQS, pub/sub: SNS, real-time stream: Kinesis
+
+#### SQS
+* Standard Queue, such as IBM MQ
+* Application decoupling in the exam is SQS
+* Unlimited throughput and unlimited number of days
+* Retention is between 1 min and 14 days
+* Latency less than 10ms
+* Size 256KB per message
+* Standard Queue can have at least once delivery, occasionaly (alternative is FIFO)
+* Can have out of order messages, so not orderly
+* SendMessage API sends message to SQS Queue, messages is persisted, until a consumer deletes it
+* Consumers can be running on EC2/AWS Lamda, on-prem servers
+* Consumers Poll SQS messages, up to 10 at a time, then delete message using DeleteMessage API
+* SQS Queue + ASG with CloudWatch Metric of Queue Length + Cloud Watch Alarm
+* As the EC2 scales up, the same message can be sent to many EC2s, thus remember: at least once, may not be orderly
+* Security: at-rest KMS, in-flight HTTPS API, Access Control via IAM to regulate the access to SQS (who can add to/ poll queue), and SQS Access Policies to manage SNS,S3 etc to write to an SQS Queue
+* Access Policies are similar to S3; cross account (EC2 in one aws account can poll another account SQS Queue) 
+* Another policy is: Publish S3 Event Notifications to SQS Queue, for instance when someone uploads an object to S3 Bucket, S3 Events can be published to SQS Queue and the JSON Policy for that should include Condition [Exam]
+* The SQS Queue processing architecture: Visibility Timeout: when a message is being processed by a consumer, that message becomes invisible to other consumers. So no rush case. But if not processed during the timeout, it goes back to the queue, thus can be processed twice; as well, if the consumer did not delete it after processing, it goes back to the queue
+
+* The consumers can also call, ChangeMessageVisibility API to delay the processing time for that specific message 
+
+
+### Containers
+Section 18
+
+#### ECS Overview
+* On ECS, the user provisions & maintains the EC2 infrastructure
+* Then ECS Service decides where to place the containers
+* Two launch types: EC2 Launch Type and Fargate
+* Can create an ECS cluster across AZs in a Region
+* Multi EC2s register to ASG(s), which are registered to ECS Cluster
+* When registered, ECS agent is attached to each EC2s
+* Then user can run ECS Tasks such as run httpd server
+* Fargate is serverless, does not manage EC2s, no need to manage the infrastructure
+* Requirement: Set CPU/RAM requirements and 
+* For each Task to run in Fargate, there is an ENI created (one-to-one)
+* Since ENI requires private IP addresses, make sure VPC has enough Private IP available for each task
+* ECS tasks can interact with other AWS services (DB, SNS etc)
+* [Potential Exam Question] EC2 Instance Profile and ECS Task Role
+* Remember, in EC2 Launch Profile in ECS, user manages the EC2s; and ECS Agents are attached to the EC2. Therefore EC2 needs to communicate with the ECS service (make api calls), or send logs to CloudWatch service, or pull images from the AWS Registry service ECR, or pull secrets. But to do all of that EC2 needs IAM Permission. That is called EC2 Instance Profile
+* But we haven't added any task to the container service. So the permission assigned to the Tasks are ECS Task Role [Another Exam Question]. Make sure that you have a dedicated ECS Task Role for each Task and Task Role is defined in the Task Definition
+* Data volumes can be hosted in EFS and EC2 Tasks/Fargate tasks can share data amongs the container. 
+* Use Case mutli-az shared storage for containers without managing and infra (i.e. serverless)=> Fargate + EFS
+* Load Balancing in EC2 Launch Type: Do not expose a dedicated port, let ECS take care of it. Connect to ALB and allow ALB security group to access any port on the EC2
+* For Fargate, since ENI is attached it has unique IP but exposes the same port (say 80), so for security, allow ALB to access the same Task Port on all ENI
+* Can automate the tasks via S3 Bucket Event emitting an event to Amazon EventBridge running an ECS Task on the ECS Cluster that has correct ECS Task Role to execute (i.e. get S3 object, transform save in DynamoDB requires ECS Task Role to have S3/DynamoDB access rights)
+
+
+#### Scaling
+* Create CloudWatch Metric (for RAM/CPU useage), triggers CloudWatch Alarm, that scales containers, thanks to ASG
+* What if the client is using EC2 Launch type and wants to scale up EC2 size? That is also available through Scale ECS Providers
+* Alternative is SQS Queue; create an SQS Queue and ECS that polls messages from SQS, then again create CloudWatch Metric for Queue Length and the rest is the same
+* Similar to Kubernetes Rolling Updates, ECS also provides the same functionality
+
+#### ECR
+* DockerHub for AWS, supporting ECS + IAM
+
+#### EKS
+* Managed Kubernetes Cluster, competing with RedHat Openshift Container Platform
+
+### Serverless
+Section 19 & 20
+
+### More Databases
+Section 21
+
+### Auditing and Logging
+Section 22
+
+### IAM Advanced
+Section 23
+
+### Security and Encryption
+Section 24
+
+### VPC
+Section 25
+
+### Disaster Recovery
+Section 26
