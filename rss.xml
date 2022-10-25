@@ -1,4 +1,37 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[A starter blog with personal notes]]></description><link>https://orhanIBM.github.io/blog</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 25 Oct 2022 00:19:15 GMT</lastBuildDate><item><title><![CDATA[AWS Solutions Architect Associate]]></title><description><![CDATA[Disclaimer: This is not exhaustive list of topics, I only kept notes for the areas that I found important. IAM & AWS CLI Section 4 IAM Users…]]></description><link>https://orhanIBM.github.io/blog/aws-saa/</link><guid isPermaLink="false">https://orhanIBM.github.io/blog/aws-saa/</guid><pubDate>Fri, 21 Jan 2022 13:50:32 GMT</pubDate><content:encoded>&lt;p&gt;Disclaimer: This is not exhaustive list of topics, I only kept notes for the areas that I found important.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Gatsby Starter Blog RSS Feed]]></title><description><![CDATA[A starter blog with personal notes]]></description><link>https://orhanIBM.github.io/blog</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 25 Oct 2022 19:26:31 GMT</lastBuildDate><item><title><![CDATA[Pointers in Go]]></title><description><![CDATA[Pointers allow sharing the data across the program, instead of copying values around. But its benefits come with a cost. Let’s take a look…]]></description><link>https://orhanIBM.github.io/blog/golang-pointers/</link><guid isPermaLink="false">https://orhanIBM.github.io/blog/golang-pointers/</guid><pubDate>Tue, 25 Oct 2022 00:22:38 GMT</pubDate><content:encoded>&lt;p&gt;Pointers allow sharing the data across the program, instead of copying values around. But its benefits come with a cost.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;go&quot;&gt;&lt;pre class=&quot;language-go&quot;&gt;&lt;code class=&quot;language-go&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// golang&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;package&lt;/span&gt; main&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;fmt&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; 
+&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    count &lt;span class=&quot;token operator&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;
+    &lt;span class=&quot;token function&quot;&gt;increment&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;count&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    fmt&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;count&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;increment&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;p &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt;p&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;
+    fmt&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// this is the value of p, which is the memory address of count&lt;/span&gt;
+    fmt&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;&amp;amp;&lt;/span&gt;p&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// this is where the p is stored in memory; showing that p (memory address) is just another data stored in memory&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// note: if you dereference it as *&amp;amp;p, it will be equal to p&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Let’s take a look at the a basic increment operation.
+In the example above, our main function initializes a count variable with value zero.
+Then passes the memory location of the count variable to the increment function and prints the value of the count.&lt;/p&gt;
+&lt;p&gt;The increment function takes an input p (meant to be short for pointer) as the memory location.
+Note that the star or asterisk is in front of int, not the input p.
+This means the input “p” is a memory address (pointer).&lt;/p&gt;
+&lt;p&gt;One can say, if the asterisk denotes the memory location, then why don’t you just use *, why do you add int after?
+Because we need to know what type of data is at that memory location that we can read/write(manipulate) it.
+Otherwise, a developer can try to increment a string. For type safety reasons we add the data type at the memory location referenced.&lt;/p&gt;
+&lt;p&gt;Inside the increment function, this time the dereferencing (the asterisk character) is in front of p;
+Meaning that the asterisk will convert the memory address to the value at that address, and then increment it.
+In plain English, it means the value at the address p.&lt;/p&gt;
+&lt;p&gt;The cost, however, is that we will start mutating the memory, outside of the active frame.
+If we are not careful, (such as in a multi-threaded programming), the program may update the value behind the scene and we wouldn’t even be aware of it.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[AWS Solutions Architect Associate]]></title><description><![CDATA[Disclaimer: This is not exhaustive list of topics, I only kept notes for the areas that I found important. IAM & AWS CLI Section 4 IAM Users…]]></description><link>https://orhanIBM.github.io/blog/aws-saa/</link><guid isPermaLink="false">https://orhanIBM.github.io/blog/aws-saa/</guid><pubDate>Fri, 21 Jan 2022 13:50:32 GMT</pubDate><content:encoded>&lt;p&gt;Disclaimer: This is not exhaustive list of topics, I only kept notes for the areas that I found important.&lt;/p&gt;
 &lt;h3&gt;IAM &amp;#x26; AWS CLI&lt;/h3&gt;
 &lt;p&gt;Section 4&lt;/p&gt;
 &lt;h4&gt;IAM Users &amp;#x26; Groups, Policies&lt;/h4&gt;
